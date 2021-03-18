@@ -107,7 +107,7 @@
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>..\libs\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libcef_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/IGNORE:4006,4221 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
   </ItemDefinitionGroup>
@@ -183,21 +183,8 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="cef_control\util\auto_unregister.h" />
     <ClInclude Include="public_define.h" />
     <ClInclude Include="ui_cef_control.h" />
-    <ClInclude Include="cef_control\app\cef_js_bridge.h" />
-    <ClInclude Include="cef_control\app\client_app.h" />
-    <ClInclude Include="cef_control\app\ipc_string_define.h" />
-    <ClInclude Include="cef_control\app\js_handler.h" />
-    <ClInclude Include="cef_control\control\cef_control.h" />
-    <ClInclude Include="cef_control\control\cef_control_base.h" />
-    <ClInclude Include="cef_control\control\cef_control_event.h" />
-    <ClInclude Include="cef_control\control\cef_native_control.h" />
-    <ClInclude Include="cef_control\handler\browser_handler.h" />
-    <ClInclude Include="cef_control\manager\cef_manager.h" />
-    <ClInclude Include="cef_control\util\memory_dc.h" />
-    <ClInclude Include="cef_control\util\util.h" />
     <ClInclude Include="menu\ui_menu.h" />
     <ClInclude Include="modal_wnd\async_do_modal.h" />
     <ClInclude Include="modal_wnd\async_modal_runner.h" />
@@ -213,19 +200,6 @@
     <ClInclude Include="windows_manager\window_ex.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="cef_control\app\cef_js_bridge.cpp" />
-    <ClCompile Include="cef_control\app\client_app.cpp" />
-    <ClCompile Include="cef_control\app\client_app_browser.cpp" />
-    <ClCompile Include="cef_control\app\client_app_render.cpp" />
-    <ClCompile Include="cef_control\app\js_handler.cpp" />
-    <ClCompile Include="cef_control\control\cef_control.cpp" />
-    <ClCompile Include="cef_control\control\cef_control_base.cpp" />
-    <ClCompile Include="cef_control\control\cef_control_base_ui.cpp" />
-    <ClCompile Include="cef_control\control\cef_control_ui.cpp" />
-    <ClCompile Include="cef_control\control\cef_native_control.cpp" />
-    <ClCompile Include="cef_control\handler\browser_handler.cpp" />
-    <ClCompile Include="cef_control\manager\cef_manager.cpp" />
-    <ClCompile Include="cef_control\util\memory_dc.cpp" />
     <ClCompile Include="menu\ui_menu.cpp" />
     <ClCompile Include="modal_wnd\async_do_modal.cpp" />
     <ClCompile Include="modal_wnd\async_modal_runner.cpp" />
@@ -241,11 +215,6 @@
     <ClCompile Include="toast\toast.cpp" />
     <ClCompile Include="windows_manager\windows_manager.cpp" />
     <ClCompile Include="windows_manager\window_ex.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\third_party\cef_wrapper\libcef_dll_wrapper.vcxproj">
-      <Project>{a9d6dc71-c0dc-4549-aea0-3b15b44e86a9}</Project>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

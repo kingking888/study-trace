@@ -31,24 +31,6 @@
     <Filter Include="windows_manager">
       <UniqueIdentifier>{9cd0028e-cbbc-4078-b80e-b5a7e1e09eb2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cef_control">
-      <UniqueIdentifier>{510a5c72-09fb-4840-b95d-6978a740e3ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cef_control\app">
-      <UniqueIdentifier>{4c65db86-4e75-4384-baf3-351c1884e0ef}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cef_control\control">
-      <UniqueIdentifier>{346fcb8a-bf68-471a-9fdb-0bb3ff142097}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cef_control\handler">
-      <UniqueIdentifier>{a8ebcd83-ee9d-46d7-9f07-9488db41f056}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cef_control\util">
-      <UniqueIdentifier>{a0409ff1-be6f-491b-b843-5c59df7967f7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="cef_control\manager">
-      <UniqueIdentifier>{f2d952a7-0fa0-4aa2-b596-1e5294c94c0b}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -90,47 +72,8 @@
     <ClInclude Include="windows_manager\windows_manager.h">
       <Filter>windows_manager</Filter>
     </ClInclude>
-    <ClInclude Include="cef_control\app\cef_js_bridge.h">
-      <Filter>cef_control\app</Filter>
-    </ClInclude>
-    <ClInclude Include="cef_control\app\client_app.h">
-      <Filter>cef_control\app</Filter>
-    </ClInclude>
-    <ClInclude Include="cef_control\app\ipc_string_define.h">
-      <Filter>cef_control\app</Filter>
-    </ClInclude>
-    <ClInclude Include="cef_control\app\js_handler.h">
-      <Filter>cef_control\app</Filter>
-    </ClInclude>
-    <ClInclude Include="cef_control\control\cef_control.h">
-      <Filter>cef_control\control</Filter>
-    </ClInclude>
-    <ClInclude Include="cef_control\control\cef_control_base.h">
-      <Filter>cef_control\control</Filter>
-    </ClInclude>
-    <ClInclude Include="cef_control\control\cef_control_event.h">
-      <Filter>cef_control\control</Filter>
-    </ClInclude>
-    <ClInclude Include="cef_control\control\cef_native_control.h">
-      <Filter>cef_control\control</Filter>
-    </ClInclude>
-    <ClInclude Include="cef_control\handler\browser_handler.h">
-      <Filter>cef_control\handler</Filter>
-    </ClInclude>
-    <ClInclude Include="cef_control\manager\cef_manager.h">
-      <Filter>cef_control\manager</Filter>
-    </ClInclude>
-    <ClInclude Include="cef_control\util\memory_dc.h">
-      <Filter>cef_control\util</Filter>
-    </ClInclude>
-    <ClInclude Include="cef_control\util\util.h">
-      <Filter>cef_control\util</Filter>
-    </ClInclude>
     <ClInclude Include="ui_cef_control.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="cef_control\util\auto_unregister.h">
-      <Filter>cef_control\util</Filter>
     </ClInclude>
     <ClInclude Include="public_define.h">
       <Filter>头文件</Filter>
@@ -166,45 +109,6 @@
     </ClCompile>
     <ClCompile Include="windows_manager\windows_manager.cpp">
       <Filter>windows_manager</Filter>
-    </ClCompile>
-    <ClCompile Include="cef_control\app\cef_js_bridge.cpp">
-      <Filter>cef_control\app</Filter>
-    </ClCompile>
-    <ClCompile Include="cef_control\app\client_app.cpp">
-      <Filter>cef_control\app</Filter>
-    </ClCompile>
-    <ClCompile Include="cef_control\app\client_app_browser.cpp">
-      <Filter>cef_control\app</Filter>
-    </ClCompile>
-    <ClCompile Include="cef_control\app\client_app_render.cpp">
-      <Filter>cef_control\app</Filter>
-    </ClCompile>
-    <ClCompile Include="cef_control\app\js_handler.cpp">
-      <Filter>cef_control\app</Filter>
-    </ClCompile>
-    <ClCompile Include="cef_control\control\cef_control.cpp">
-      <Filter>cef_control\control</Filter>
-    </ClCompile>
-    <ClCompile Include="cef_control\control\cef_control_base.cpp">
-      <Filter>cef_control\control</Filter>
-    </ClCompile>
-    <ClCompile Include="cef_control\control\cef_control_base_ui.cpp">
-      <Filter>cef_control\control</Filter>
-    </ClCompile>
-    <ClCompile Include="cef_control\control\cef_control_ui.cpp">
-      <Filter>cef_control\control</Filter>
-    </ClCompile>
-    <ClCompile Include="cef_control\control\cef_native_control.cpp">
-      <Filter>cef_control\control</Filter>
-    </ClCompile>
-    <ClCompile Include="cef_control\handler\browser_handler.cpp">
-      <Filter>cef_control\handler</Filter>
-    </ClCompile>
-    <ClCompile Include="cef_control\manager\cef_manager.cpp">
-      <Filter>cef_control\manager</Filter>
-    </ClCompile>
-    <ClCompile Include="cef_control\util\memory_dc.cpp">
-      <Filter>cef_control\util</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
