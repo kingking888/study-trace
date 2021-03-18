@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1340
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "injector", "src\injector\injector.vcxproj", "{F1A9371F-9A34-45A0-98EB-83FF371F067F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3rdparty", "3rdparty", "{9450F472-8F28-4B9D-ADD3-60DD73AA299B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "duilib", "3rdparty\NIM_Duilib_Framework\duilib\duilib.vcxproj", "{E106ACD7-4E53-4AEE-942B-D0DD426DB34E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "base", "3rdparty\NIM_Duilib_Framework\base\base.vcxproj", "{8D9A6595-717A-41C8-B468-0011A72BE3D1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ui_components", "3rdparty\NIM_Duilib_Framework\ui_components\ui_components.vcxproj", "{0149BA6E-3C0A-426D-AA0A-0B9EC7742F19}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "注入器", "注入器", "{2AA03810-45D9-4D0E-A16D-E47D096FC55B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1A9371F-9A34-45A0-98EB-83FF371F067F}.Debug|x64.ActiveCfg = Debug|x64
+		{F1A9371F-9A34-45A0-98EB-83FF371F067F}.Debug|x64.Build.0 = Debug|x64
+		{F1A9371F-9A34-45A0-98EB-83FF371F067F}.Debug|x86.ActiveCfg = Debug|Win32
+		{F1A9371F-9A34-45A0-98EB-83FF371F067F}.Debug|x86.Build.0 = Debug|Win32
+		{F1A9371F-9A34-45A0-98EB-83FF371F067F}.Release|x64.ActiveCfg = Release|x64
+		{F1A9371F-9A34-45A0-98EB-83FF371F067F}.Release|x64.Build.0 = Release|x64
+		{F1A9371F-9A34-45A0-98EB-83FF371F067F}.Release|x86.ActiveCfg = Release|Win32
+		{F1A9371F-9A34-45A0-98EB-83FF371F067F}.Release|x86.Build.0 = Release|Win32
+		{E106ACD7-4E53-4AEE-942B-D0DD426DB34E}.Debug|x64.ActiveCfg = Debug|x64
+		{E106ACD7-4E53-4AEE-942B-D0DD426DB34E}.Debug|x64.Build.0 = Debug|x64
+		{E106ACD7-4E53-4AEE-942B-D0DD426DB34E}.Debug|x86.ActiveCfg = Debug|Win32
+		{E106ACD7-4E53-4AEE-942B-D0DD426DB34E}.Debug|x86.Build.0 = Debug|Win32
+		{E106ACD7-4E53-4AEE-942B-D0DD426DB34E}.Release|x64.ActiveCfg = Release|x64
+		{E106ACD7-4E53-4AEE-942B-D0DD426DB34E}.Release|x64.Build.0 = Release|x64
+		{E106ACD7-4E53-4AEE-942B-D0DD426DB34E}.Release|x86.ActiveCfg = Release|Win32
+		{E106ACD7-4E53-4AEE-942B-D0DD426DB34E}.Release|x86.Build.0 = Release|Win32
+		{8D9A6595-717A-41C8-B468-0011A72BE3D1}.Debug|x64.ActiveCfg = Debug|x64
+		{8D9A6595-717A-41C8-B468-0011A72BE3D1}.Debug|x64.Build.0 = Debug|x64
+		{8D9A6595-717A-41C8-B468-0011A72BE3D1}.Debug|x86.ActiveCfg = Debug|Win32
+		{8D9A6595-717A-41C8-B468-0011A72BE3D1}.Debug|x86.Build.0 = Debug|Win32
+		{8D9A6595-717A-41C8-B468-0011A72BE3D1}.Release|x64.ActiveCfg = Release|x64
+		{8D9A6595-717A-41C8-B468-0011A72BE3D1}.Release|x64.Build.0 = Release|x64
+		{8D9A6595-717A-41C8-B468-0011A72BE3D1}.Release|x86.ActiveCfg = Release|Win32
+		{8D9A6595-717A-41C8-B468-0011A72BE3D1}.Release|x86.Build.0 = Release|Win32
+		{0149BA6E-3C0A-426D-AA0A-0B9EC7742F19}.Debug|x64.ActiveCfg = Debug|x64
+		{0149BA6E-3C0A-426D-AA0A-0B9EC7742F19}.Debug|x64.Build.0 = Debug|x64
+		{0149BA6E-3C0A-426D-AA0A-0B9EC7742F19}.Debug|x86.ActiveCfg = Debug|Win32
+		{0149BA6E-3C0A-426D-AA0A-0B9EC7742F19}.Debug|x86.Build.0 = Debug|Win32
+		{0149BA6E-3C0A-426D-AA0A-0B9EC7742F19}.Release|x64.ActiveCfg = Release|x64
+		{0149BA6E-3C0A-426D-AA0A-0B9EC7742F19}.Release|x64.Build.0 = Release|x64
+		{0149BA6E-3C0A-426D-AA0A-0B9EC7742F19}.Release|x86.ActiveCfg = Release|Win32
+		{0149BA6E-3C0A-426D-AA0A-0B9EC7742F19}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E106ACD7-4E53-4AEE-942B-D0DD426DB34E} = {9450F472-8F28-4B9D-ADD3-60DD73AA299B}
+		{8D9A6595-717A-41C8-B468-0011A72BE3D1} = {9450F472-8F28-4B9D-ADD3-60DD73AA299B}
+		{0149BA6E-3C0A-426D-AA0A-0B9EC7742F19} = {9450F472-8F28-4B9D-ADD3-60DD73AA299B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0F633AA1-BB8A-4A02-BEAE-5A5EA9C1A276}
+	EndGlobalSection
+EndGlobal
