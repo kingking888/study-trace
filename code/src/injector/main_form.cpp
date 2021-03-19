@@ -79,16 +79,22 @@ void MainForm::onClickInject() {
     }
 
     if (OpenFileDialog(load_dll_path_, sizeof(load_dll_path_))) {
-        HANDLE pid;
+        DWORD pid = 0;
+        pid = core::ProcessNameFindPID(kWeChatExeName.c_str());
 
         try {
-            pid = (HANDLE)core::ProcessNameFindPID(kWeChatExeName.c_str());
+            if (core::CheckIsInject(pid, load_dll_path_)) {
+                btn_inject_->SetEnabled(false);
+                btn_unload_->SetEnabled(true);
+                nim_comp::ShowMsgBox(this->GetHWND(), nullptr, L"已经注入！", false);
+                return;
+            }
 
             if (pid == 0) {
                 core::StartProcess(ed_path_->GetText());
             }
 
-            core::InjectDll(kWeChatExeName, load_dll_path_, pid);
+            core::InjectDll(kWeChatExeName, load_dll_path_);
             btn_inject_->SetEnabled(false);
             btn_unload_->SetEnabled(true);
             nim_comp::ShowMsgBox(this->GetHWND(), nullptr, L"注入成功！", false);

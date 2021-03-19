@@ -102,7 +102,7 @@ CString GetAppRegeditPath2(CString strAppName) {
 
 namespace core {
 
-    DWORD ProcessNameFindPID(const char* ProcessName) {
+    DWORD ProcessNameFindPID(const char* ProcessName) noexcept {
         PROCESSENTRY32 pe32 = { 0 };
         pe32.dwSize = sizeof(PROCESSENTRY32);
         HANDLE hProcess = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, NULL);
@@ -161,7 +161,7 @@ namespace core {
         wxPid = pi.hProcess;*/
     }
 
-    void InjectDll(const std::string& exeName, const std::wstring& targetDllFilePath, HANDLE& outPid) {
+    void InjectDll(const std::string& exeName, const std::wstring& targetDllFilePath) {
         //获取微信Pid
         DWORD dwPid = ProcessNameFindPID(exeName.c_str());
 
@@ -169,21 +169,15 @@ namespace core {
             throw std::exception("not find process.");
         }
 
-        const auto index = targetDllFilePath.find_last_of(L"\\");
-
-        if (index == std::wstring::npos) {
-            throw std::exception("invalid filePath");
-        }
-
-        std::wstring fileName = targetDllFilePath.substr(index + 1, targetDllFilePath.length() - index - 1);
+        std::wstring fileName = getFileName(targetDllFilePath);
 
         //检测dll是否已经注入
-        if (!CheckIsInject(dwPid, fileName)) {
+        if (!CheckIsInject(dwPid, targetDllFilePath)) {
             //打开进程
             HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, dwPid);
 
             if (hProcess == nullptr) {
-                throw std::exception("进程打开失败");
+                throw std::exception(nbase::UTF16ToUTF8(L"进程打开失败").c_str());
             }
 
             // 在微信进程中申请内存
@@ -191,21 +185,21 @@ namespace core {
             LPVOID pAddress = VirtualAllocEx(hProcess, NULL, MAX_PATH, MEM_COMMIT, PAGE_EXECUTE_READWRITE);
 
             if (pAddress == nullptr) {
-                throw std::exception("内存分配失败");
+                throw std::exception(nbase::UTF16ToUTF8(L"内存分配失败").c_str());
             }
 
             //写入dll路径到微信进程
             const auto path = nbase::UTF16ToUTF8(targetDllFilePath);
 
             if (WriteProcessMemory(hProcess, pAddress, path.c_str(), path.length(), NULL) == 0) {
-                throw std::exception("路径写入失败");
+                throw std::exception(nbase::UTF16ToUTF8(L"路径写入失败").c_str());
             }
 
             //获取LoadLibraryA函数地址
             FARPROC pLoadLibraryAddress = GetProcAddress(GetModuleHandleA("kernel32.dll"), "LoadLibraryA");
 
             if (pLoadLibraryAddress == NULL) {
-                throw std::exception("获取LoadLibraryA函数地址失败");
+                throw std::exception(nbase::UTF16ToUTF8(L"获取LoadLibraryA函数地址失败").c_str());
             }
 
             // 注入成功后开线程操作
@@ -213,7 +207,7 @@ namespace core {
             HANDLE hRemoteThread = CreateRemoteThread(hProcess, NULL, 0, (LPTHREAD_START_ROUTINE)pLoadLibraryAddress, pAddress, 0, NULL);
 
             if (hRemoteThread == NULL) {
-                throw std::exception("远程线程注入失败");
+                throw std::exception(nbase::UTF16ToUTF8(L"远程线程注入失败").c_str());
             }
 
             CloseHandle(hRemoteThread);
@@ -221,7 +215,18 @@ namespace core {
         }
     }
 
-    bool CheckIsInject(DWORD processid, const std::wstring& dllFilename) {
+    std::wstring getFileName(const std::wstring& filePath) {
+        const auto index = filePath.find_last_of(L"\\");
+
+        if (index == std::wstring::npos) {
+            throw std::exception("invalid filePath");
+        }
+
+        std::wstring fileName = filePath.substr(index + 1, filePath.length() - index - 1);
+        return std::move(fileName);
+    }
+
+    bool CheckIsInject(DWORD processid, const std::wstring& targetDllFilePath) {
         HANDLE hModuleSnap = INVALID_HANDLE_VALUE;
         //初始化模块信息结构体
         MODULEENTRY32 me32 = { sizeof(MODULEENTRY32) };
@@ -230,7 +235,7 @@ namespace core {
 
         //如果句柄无效就返回false
         if (hModuleSnap == INVALID_HANDLE_VALUE) {
-            throw std::exception("创建模块快照失败");
+            throw std::exception(nbase::UTF16ToUTF8(L"创建模块快照失败").c_str());
         }
 
         //通过模块快照句柄获取第一个模块的信息
@@ -238,11 +243,13 @@ namespace core {
             //获取失败则关闭句柄
             CloseHandle(hModuleSnap);
 
-            throw std::exception("获取第一个模块的信息失败");
+            throw std::exception(nbase::UTF16ToUTF8(L"获取第一个模块的信息失败").c_str());
         }
 
+        std::wstring fileName = getFileName(targetDllFilePath);
+
         do {
-            if (std::wstring(me32.szModule) == dllFilename) {
+            if (std::wstring(me32.szModule) == fileName) {
                 return true;
             }
 
@@ -256,16 +263,10 @@ namespace core {
         DWORD dwPid = ProcessNameFindPID(exeName.c_str());
 
         if (dwPid == 0) {
-            throw std::exception("找不到进程");
+            throw std::exception(nbase::UTF16ToUTF8(L"找不到进程").c_str());
         }
 
-        const auto index = targetDllFilePath.find_last_of(L"\\");
-
-        if (index == std::wstring::npos) {
-            throw std::exception("invalid filePath");
-        }
-
-        std::wstring fileName = targetDllFilePath.substr(index + 1, targetDllFilePath.length() - index - 1);
+        std::wstring fileName = getFileName(targetDllFilePath);
 
         //遍历模块
         HANDLE hSnap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, dwPid);
@@ -288,7 +289,7 @@ namespace core {
         CloseHandle(hSnap);
 
         if (flag == FALSE) {
-            throw std::exception("找不到目标模块");
+            throw std::exception(nbase::UTF16ToUTF8(L"找不到目标模块").c_str());
         }
 
         //打开目标进程
@@ -300,66 +301,17 @@ namespace core {
         HANDLE hThread = CreateRemoteThread(hPro, NULL, 0, (LPTHREAD_START_ROUTINE)pFun, ME32.modBaseAddr, 0, NULL);
 
         if (!hThread) {
-            throw std::exception("创建远程线程失败");
+            throw std::exception(nbase::UTF16ToUTF8(L"创建远程线程失败").c_str());
         }
 
         if (WaitForSingleObject(hThread, 2 * 1000) == WAIT_TIMEOUT) {
             CloseHandle(hThread);
             CloseHandle(hPro);
-            throw std::exception("远程线程执行超时");
+            throw std::exception(nbase::UTF16ToUTF8(L"远程线程执行超时，动态库或许有残留线程没退出！").c_str());
         }
 
         CloseHandle(hThread);
         CloseHandle(hPro);
-
-        /*HANDLE hProcess = OpenProcess(PROCESS_CREATE_THREAD | PROCESS_VM_OPERATION | PROCESS_VM_WRITE,
-                                      FALSE, dwPid);
-
-        if (hProcess == NULL) {
-            throw std::exception("打开进程失败");
-        }
-
-        DWORD dwSize = 0;
-        DWORD dwWritten = 0;
-        DWORD dwHandle = 0;
-
-        dwSize = fileName.size() + 1;
-        LPVOID lpBuf = VirtualAllocEx(hProcess, NULL, dwSize, MEM_COMMIT, PAGE_READWRITE);
-
-        if (!WriteProcessMemory(hProcess, lpBuf, (LPVOID)fileName.c_str(), dwSize, &dwWritten)) {
-            VirtualFreeEx(hProcess, lpBuf, dwSize, MEM_DECOMMIT);
-            CloseHandle(hProcess);
-            throw std::exception("WriteProcessMemory 失败");
-        }
-
-        LPVOID pFun = GetProcAddress(GetModuleHandle(L"Kernel32"), "GetModuleHandleA");
-
-        HANDLE hThread = CreateRemoteThread(hProcess, NULL, 0, (LPTHREAD_START_ROUTINE)pFun,
-                                            lpBuf, 0, NULL);
-
-        if (hThread == NULL) {
-            CloseHandle(hProcess);
-            throw std::exception("创建远程线程失败");
-        }
-
-        if (WaitForSingleObject(hThread, 2 * 1000) == WAIT_TIMEOUT) {
-            throw std::exception("远程线程执行超时");
-        }
-
-        GetExitCodeThread(hThread, &dwHandle);
-
-        VirtualFreeEx(hProcess, lpBuf, dwSize, MEM_DECOMMIT);
-        CloseHandle(hThread);
-
-        pFun = GetProcAddress(GetModuleHandle(L"Kernel32"), "FreeLibraryAndExitThread");
-        hThread = CreateRemoteThread(hProcess, NULL, 0, (LPTHREAD_START_ROUTINE)pFun, (LPVOID)dwHandle, 0, NULL);
-
-        if (WaitForSingleObject(hThread, 2 * 1000) == WAIT_TIMEOUT) {
-            throw std::exception("远程线程执行超时");
-        }
-
-        CloseHandle(hThread);
-        CloseHandle(hProcess);*/
     }
 
 }

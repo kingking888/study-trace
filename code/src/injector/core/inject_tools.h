@@ -9,7 +9,14 @@ namespace core {
     * @param ProcessName：进程名字，带.exe
     * @return
     */
-    DWORD ProcessNameFindPID(const char* processName);
+    DWORD ProcessNameFindPID(const char* processName) noexcept;
+
+    /** @fn getFileName
+      * @brief 从路径中截取文件名
+      * @param filePath：完整文件路径名
+      * @return
+      */
+    std::wstring getFileName(const std::wstring& filePath);
 
     /** @fn StartProcess
       * @brief 启动进程
@@ -23,10 +30,9 @@ namespace core {
       * @brief 注入dll
       * @param exeName：进程名
       *		   targetDllFilePath：要注入动态库的路径
-      *        outPid：返回成功注入的进程ID
       * @return
       */
-    void InjectDll(const std::string& exeName, const std::wstring& targetDllFilePath, HANDLE& outPid);
+    void InjectDll(const std::string& exeName, const std::wstring& targetDllFilePath);
 
     /** @fn UnloadDll
       * @brief 卸载DLL
@@ -39,9 +45,10 @@ namespace core {
     /** @fn CheckIsInject
       * @brief 检测DLL是否已经注入
       * @param dwProcessid：进程ID
+      *        targetDllFilePath：文件路径名
       * @return
       */
-    bool CheckIsInject(DWORD processid, const std::wstring& dllFilename);
+    bool CheckIsInject(DWORD processid, const std::wstring& targetDllFilePath);
 
 }
 
