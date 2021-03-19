@@ -4,6 +4,8 @@
 #include "base/file/file_path.h"
 #include "msgbox/msgbox.h"
 
+#include "base/win32/path_util.h"
+
 #include <COmmdlg.h>
 
 const std::wstring MainForm::kClassName = L"InjectorForm";
@@ -52,6 +54,7 @@ bool OpenFileDialog(wchar_t filePath[], int length) {
     //
     ofn.lpstrFilter = TEXT("¶¯Ì¬¿â(*.dll)\0*.dll\0All Files(*.*)\0*.*\0\0");
     ofn.Flags = OFN_FILEMUSTEXIST;
+    ofn.lpstrInitialDir = nbase::win32::GetCurrentModuleDirectory().c_str();
     //no extention file!    ofn.lpstrFilter="Any file(*.*)\0*.*\0ddfs\0ddfs*\0";
     return (GetOpenFileName((LPOPENFILENAME)&ofn));
 }
