@@ -156,9 +156,6 @@ namespace core {
                 throw std::exception("not find the window,please check it");
             }
         }
-
-        /*dwPid = pi.dwProcessId;
-        wxPid = pi.hProcess;*/
     }
 
     void InjectDll(const std::string& exeName, const std::wstring& targetDllFilePath) {

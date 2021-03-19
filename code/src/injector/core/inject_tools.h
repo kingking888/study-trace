@@ -27,7 +27,7 @@ namespace core {
     void StartProcess(std::wstring filePath, std::wstring firstWindowName = L"WeChatLoginWndForPC");
 
     /** @fn InjectDll
-      * @brief 注入dll
+      * @brief 注入dll，对应的动态库入口DllMain会执行一次DLL_PROCESS_ATTACH，请在这里挂载Hook等初始化动作。
       * @param exeName：进程名
       *		   targetDllFilePath：要注入动态库的路径
       * @return
@@ -35,7 +35,8 @@ namespace core {
     void InjectDll(const std::string& exeName, const std::wstring& targetDllFilePath);
 
     /** @fn UnloadDll
-      * @brief 卸载DLL
+      * @brief 卸载DLL，对应的动态库入口DllMain会执行一次DLL_PROCESS_DETACH，请在这里释放Hook、线程等动作。
+      *        PS：如果有残留线程，则将无法卸载DLL！微信关闭后，也将无法正确退出，从而变成僵尸进程。
       * @param exeName：要卸载动态库的目标进程
       *        targetDllFilename：要卸载动态库的名字
       * @return
