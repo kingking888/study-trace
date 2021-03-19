@@ -5,8 +5,14 @@
 #include "main.h"
 #include "main_form.h"
 
+#include <iostream>
+
 enum ThreadId {
     kThreadUI
+};
+
+enum class WeChatOffset : DWORD {
+    QrCodeHookOffset = 0x572459, // 二维码Hook地址
 };
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
