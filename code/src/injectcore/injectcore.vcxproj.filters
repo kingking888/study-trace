@@ -26,7 +26,7 @@
     <ClInclude Include="inject\inject_dll.h">
       <Filter>inject</Filter>
     </ClInclude>
-    <ClInclude Include="inject\log.hpp">
+    <ClInclude Include="inject\log.h">
       <Filter>inject</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,6 +38,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="inject\inject_api_login.cpp">
+      <Filter>inject</Filter>
+    </ClCompile>
+    <ClCompile Include="inject\log.cpp">
       <Filter>inject</Filter>
     </ClCompile>
   </ItemGroup>

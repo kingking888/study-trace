@@ -108,11 +108,12 @@ void MainForm::onClickInject() {
 void MainForm::onClickUnload() {
     try {
         core::UnloadDll(kWeChatExeName, load_dll_path_);
-        btn_inject_->SetEnabled(true);
-        btn_unload_->SetEnabled(false);
         nim_comp::ShowMsgBox(this->GetHWND(), nullptr, L"Ğ¶ÔØ³É¹¦£¡", false);
 
     } catch (const std::exception& e) {
         nim_comp::ShowMsgBox(this->GetHWND(), nullptr, nbase::UTF8ToUTF16(e.what()), false);
     }
+
+    btn_inject_->SetEnabled(true);
+    btn_unload_->SetEnabled(false);
 }

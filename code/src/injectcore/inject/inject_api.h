@@ -8,20 +8,26 @@
 const std::wstring kWeChatDll = L"WeChatWin.dll";
 const int kHookLen = 5;
 
+typedef unsigned long dword_t; // DWORD -> unsigned long
+typedef unsigned char byte_t;  //
+
 namespace inject {
-    typedef unsigned long dword_t; // DWORD -> unsigned long
-    typedef unsigned char byte_t;  //
-
-    typedef std::function<void(const char* image, int len)> LoginQrCodeCb;
-
     /** @class WeChatOffset
-      * @brief 微信偏移
-      * @author fei.xu
-      * @date 2021/3/19
-      */
+    * @brief 微信偏移
+    * @author fei.xu
+    * @date 2021/3/19
+    */
     enum class WeChatOffset : dword_t {
         QrCodeHookOffset = 0x5726CA, // 二维码Hook地址
     };
+
+    struct QrCodeInfo {
+        dword_t addr;
+        byte_t* image;
+        int image_len;
+    };
+
+    typedef std::function<void(const QrCodeInfo&)> LoginQrCodeCb;
 
     /** @fn HookLoginQrCode
       * @brief Hook登录二维码
@@ -31,10 +37,12 @@ namespace inject {
     void hookLoginQrCode(const LoginQrCodeCb& cb);
     /** @fn saveQrCodeToImage
       * @brief 保存二维码数据为png图片
-      * @param
+      * @param image：图片数据
+      *        len：图片长度
+      *        saveFilePath：保存路径，可以是相对路径
       * @return
       */
-    void saveQrCodeToImage(const byte_t* image, const int len, const std::wstring& saveFilePath);
+    void saveQrCodeToImage(const byte_t* image, const int len, const std::wstring& saveFilePath) noexcept;
     /** @fn UnHookLoginQrCode
       * @brief 卸载登录二维码Hook
       * @param

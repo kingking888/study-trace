@@ -1,9 +1,5 @@
-#ifndef _LOG_F771DCA4_8D04_4B28_8A27_589FE58A717D_
-#define _LOG_F771DCA4_8D04_4B28_8A27_589FE58A717D_
-
 #include "pch.h"
-#include <cstdio>
-#include <string>
+#include "log.h"
 
 namespace inject {
     const int kMaxLogBuffLen = 1024;
@@ -145,5 +141,3 @@ namespace inject {
     }
 #endif
 }
-
-#endif//_LOG_F771DCA4_8D04_4B28_8A27_589FE58A717D_

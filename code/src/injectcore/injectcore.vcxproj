@@ -75,7 +75,7 @@
     <OutDir>..\..\bin\</OutDir>
     <IntDir>$(ProjectDir)..\..\tmp\$(PlatformName)\$(ProjectName)\$(Configuration)\</IntDir>
     <TargetName>$(ProjectName)_d</TargetName>
-    <IncludePath>.;$(IncludePath)</IncludePath>
+    <IncludePath>.;..\..\3rdparty\NIM_Duilib_Framework;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -162,12 +162,13 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="inject\inject_api.h" />
     <ClInclude Include="inject\inject_dll.h" />
-    <ClInclude Include="inject\log.hpp" />
+    <ClInclude Include="inject\log.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="inject\inject_api_login.cpp" />
+    <ClCompile Include="inject\log.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

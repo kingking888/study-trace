@@ -1,8 +1,9 @@
 #include "pch.h"
 #include "inject_api.h"
-#include "log.hpp"
+#include "log.h"
 
-#include "base/file/file_path.h"
+#include "base/file/file_util.h"
+#include "base/util/string_util.h"
 
 namespace inject {
     dword_t g_p_esi = 0;
@@ -28,12 +29,16 @@ namespace inject {
         Infof("get qr code, address:%X,len:%d", pic, imageLen);
 
         // 拷贝图片的数据
-        char data[kMaxQrCodeImageLen] {};
+        byte_t data[kMaxQrCodeImageLen] {};
 
         memcpy(data, *((LPVOID*)pic), imageLen);
 
         if (g_login_qr_code_cb != nullptr) {
-            g_login_qr_code_cb(data, imageLen);
+            QrCodeInfo info{};
+            info.addr = pic;
+            info.image = data;
+            info.image_len = imageLen;
+            g_login_qr_code_cb(info);
         }
     }
 
@@ -128,38 +133,45 @@ namespace inject {
         }
 
         ::CloseHandle(hwnd);
+
+        g_login_qr_code_cb = cb;
     }
 
-    //void saveQrCodeToImage(const byte_t* image, const int len, const std::wstring& saveFilePath) {
-    //    wchar_t szTempPath[MAX_PATH] = { 0 };
-    //    wchar_t szPicturePath[MAX_PATH] = { 0 };
-    //    GetTempPathW(MAX_PATH, szTempPath);
+    void saveQrCodeToImage(const byte_t* image, const int len, const std::wstring& saveFilePath) noexcept {
+        if (nbase::FilePathIsExist(saveFilePath, false)) {
+            Warnf("image file is exist,delete");
+            nbase::DeleteFileW(saveFilePath);
+        }
 
-    //    wsprintf(szPicturePath, L"%s%s", szTempPath, "qrcode.png");
-    //    DeleteFileW(szTempPath);
+        // create root dir
+        auto pos = saveFilePath.find_last_of(L"\\");
 
-    //    if (nbase::FilePathIsExist(saveFilePath)) {
+        if (pos != std::wstring::npos) {
+            std::wstring dir = saveFilePath.substr(0, pos);
 
-    //    }
+            if (!nbase::FilePathIsExist(dir, true)) {
+                nbase::CreateDirectoryW(dir);
+            }
+        }
 
-    //    //将文件写到Temp目录下
-    //    HANDLE hFile = CreateFileW(szPicturePath, GENERIC_ALL, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+        // write to file
+        HANDLE fileHandle = CreateFileW(saveFilePath.c_str(), GENERIC_ALL, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
-    //    if (hFile == NULL) {
-    //        LogWarn("CreateFileW err,path={}", nbase::UTF16ToUTF8(szPicturePath));
-    //        return;
-    //    }
+        if (fileHandle == NULL) {
+            Warnf("CreateFileW err,path={}", nbase::UTF16ToUTF8(saveFilePath));
+            return;
+        }
 
-    //    DWORD dwRead = 0;
+        dword_t dwRead = 0;
 
-    //    if (WriteFile(hFile, PicData, cpyLen, &dwRead, NULL) == 0) {
-    //        LogWarn("WriteFile err,path={}", nbase::UTF16ToUTF8(szPicturePath));
-    //        return;
-    //    }
+        if (WriteFile(fileHandle, image, len, &dwRead, NULL) == 0) {
+            Warnf("WriteFile err,path={}", nbase::UTF16ToUTF8(saveFilePath));
+            return;
+        }
 
-    //    CloseHandle(hFile);
-    //    LogInfof("success save to %s", nbase::UTF16ToUTF8(szPicturePath));
-    //}
+        CloseHandle(fileHandle);
+        Debugf("success save to %s", nbase::UTF16ToUTF8(saveFilePath));
+    }
 
     void unHookLoginQrCode() {
         dword_t hookAddr = getWeChatBaseAddr() + (dword_t)WeChatOffset::QrCodeHookOffset;
@@ -167,6 +179,8 @@ namespace inject {
         // 写入原来的备份代码
         ::WriteProcessMemory(hwnd, (LPVOID)hookAddr, g_back_code, kHookLen, NULL);
         ::CloseHandle(hwnd);
+
+        Debugf("unHookLoginQrCode");
     }
 
     dword_t getWeChatBaseAddr() {

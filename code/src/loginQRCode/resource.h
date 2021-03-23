@@ -10,6 +10,8 @@
 #define ID_BTN_Unhook                   1004
 #define IDC_STATIC_PIC                  1005
 #define ID_BTN_HOOK                     1006
+#define ID_BTN_HOOK2                    1007
+#define ID_BTN_Refresh                  1007
 
 // Next default values for new objects
 // 
