@@ -10,6 +10,7 @@ const int kHookLen = 5;
 
 namespace inject {
     typedef unsigned long dword_t; // DWORD -> unsigned long
+    typedef unsigned char byte_t;  //
 
     typedef std::function<void(const char* image, int len)> LoginQrCodeCb;
 
@@ -19,7 +20,7 @@ namespace inject {
       * @date 2021/3/19
       */
     enum class WeChatOffset : dword_t {
-        QrCodeHookOffset = 0x572459, // 二维码Hook地址
+        QrCodeHookOffset = 0x5726CA, // 二维码Hook地址
     };
 
     /** @fn HookLoginQrCode
@@ -28,6 +29,12 @@ namespace inject {
       * @return
       */
     void hookLoginQrCode(const LoginQrCodeCb& cb);
+    /** @fn saveQrCodeToImage
+      * @brief 保存二维码数据为png图片
+      * @param
+      * @return
+      */
+    void saveQrCodeToImage(const byte_t* image, const int len, const std::wstring& saveFilePath);
     /** @fn UnHookLoginQrCode
       * @brief 卸载登录二维码Hook
       * @param

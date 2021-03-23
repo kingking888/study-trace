@@ -26,6 +26,9 @@
     <ClInclude Include="inject\inject_dll.h">
       <Filter>inject</Filter>
     </ClInclude>
+    <ClInclude Include="inject\log.hpp">
+      <Filter>inject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">

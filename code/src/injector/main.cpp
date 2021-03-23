@@ -6,6 +6,7 @@
 #include "main_form.h"
 
 #include <iostream>
+#include <cstdio>
 
 enum ThreadId {
     kThreadUI
