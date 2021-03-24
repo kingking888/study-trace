@@ -183,6 +183,25 @@ namespace inject {
         Debugf("unHookLoginQrCode");
     }
 
+    void refreshQrCode() {
+        //Infof("refreshQrCode %X", refreshQrCode);
+
+        //dword_t baseAddr = getWeChatBaseAddr();
+        //dword_t callAddr1 = baseAddr + (dword_t)WeChatOffset::RefreshQrCode1;
+        ////dword_t callAddr2 = baseAddr + (dword_t)WeChatOffset::RefreshQrCode1;
+
+        //__asm {
+        //    call callAddr1;
+        //    //mov ecx, eax;
+        //    //call callAddr2;
+        //}
+    }
+
+    bool getLoginStatus() {
+        dword_t ptr = getWeChatBaseAddr() + (dword_t)WeChatOffset::LoginFlagOffset;
+        return *reinterpret_cast<dword_t*>(ptr);
+    }
+
     dword_t getWeChatBaseAddr() {
         return (dword_t)GetModuleHandle(kWeChatDll.c_str());
     }

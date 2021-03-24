@@ -30,6 +30,7 @@ BOOL APIENTRY DllMain( HMODULE hModule,
         inject::Infof("DLL_PROCESS_ATTACH");
 
         // 模态对话框，导致无法通过注入器卸载，使用EndDialog(g_dialog_hwnd_, 0)关闭模态对话框的同时，自动卸载dll
+        // 因为阻塞了微信，故微信无法进入主界面，除非关闭本界面
         ::DialogBox(hModule, MAKEINTRESOURCE(IDDMain), NULL, DialogProc);
         break;
     }
@@ -102,6 +103,14 @@ INT_PTR CALLBACK DialogProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lPara
             inject::unHookLoginQrCode();
             ::MessageBoxW(hDlg, L"卸载Hook成功", L"提示", 0);
             break;
+
+        case ID_BTN_Refresh: {
+            bool ret = inject::getLoginStatus();
+            ::MessageBoxW(hDlg, ret ? L"已登录" : L"未登录", L"提示", 0);
+
+            break;
+        }
+
 
         default:
             break;

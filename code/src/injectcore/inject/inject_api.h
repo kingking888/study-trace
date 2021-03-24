@@ -19,6 +19,10 @@ namespace inject {
     */
     enum class WeChatOffset : dword_t {
         QrCodeHookOffset = 0x5726CA, // 二维码Hook地址
+        //RefreshQrCode1 = 0x3FDA40,   // 刷新二维码Call地址1
+        //RefreshQrCode2 = 0x3984B0,   // 刷新二维码Call地址2
+        //LoginStatusChangedOffset = 0x47110F, // 登录信息改变hook偏移
+        LoginFlagOffset = 0x18A39F0,   // 登陆标志
     };
 
     struct QrCodeInfo {
@@ -49,6 +53,19 @@ namespace inject {
       * @return
       */
     void unHookLoginQrCode();
+    /** @fn refreshQrCode
+      * @brief 刷新二维码
+      * @param
+      * @return
+      */
+    //void refreshQrCode();
+
+    /** @fn getLoginStatus
+      * @brief 获取微信是否登录
+      * @param
+      * @return
+      */
+    bool getLoginStatus();
 
     // helper
     /** @fn getWeChatBaseAddr
