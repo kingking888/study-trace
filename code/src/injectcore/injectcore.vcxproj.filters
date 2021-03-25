@@ -38,6 +38,9 @@
     <ClInclude Include="inject\inject_dll.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="inject\common.h">
+      <Filter>inject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -53,6 +56,9 @@
       <Filter>inject</Filter>
     </ClCompile>
     <ClCompile Include="inject\api_contact_list.cpp">
+      <Filter>inject</Filter>
+    </ClCompile>
+    <ClCompile Include="inject\common.cpp">
       <Filter>inject</Filter>
     </ClCompile>
   </ItemGroup>

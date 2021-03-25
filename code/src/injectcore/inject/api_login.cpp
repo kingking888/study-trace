@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "api_login.h"
+#include "common.h"
 #include "log.h"
 
 #include "base/file/file_util.h"
@@ -202,7 +203,4 @@ namespace inject {
         return *reinterpret_cast<dword_t*>(ptr);
     }
 
-    dword_t getWeChatBaseAddr() {
-        return (dword_t)GetModuleHandle(kWeChatDll.c_str());
-    }
 }

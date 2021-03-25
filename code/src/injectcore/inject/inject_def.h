@@ -23,6 +23,13 @@ namespace inject {
         //RefreshQrCode2 = 0x3984B0,   // 刷新二维码Call地址2
         //LoginStatusChangedOffset = 0x47110F, // 登录信息改变hook偏移
         LoginFlagOffset = 0x18A39F0,   // 登陆标志
+
+        ContactListHookOffset = 0x22A302,	     // 通讯录列表Hook
+        ContactListOriginCallOffset = 0x4E5310,  // 通讯录列表被覆盖的Call偏移
+        ContactListContentWeChatIdOffset = 0x8,			// 通讯录列表，微信ID内容偏移
+        ContactListContentWeChatUserNameOffset = 0x1C,  // 微信号
+        ContactListContentWeChatNickNameOffset = 0x50,  // 微信备注（昵称）
+        ContactListContentWeChatNameOffset = 0x64,      // 微信名称
     };
 
     /** @class QrCodeInfo
@@ -42,14 +49,13 @@ namespace inject {
       * @date 2021/3/25
       */
     struct ContactInfo {
-        std::wstring wxid; // 微信ID
-        std::wstring name; // 名称
-        std::wstring nickName; // 昵称（备注）
+        std::wstring wxid;		// 微信ID
+        std::wstring userName;	// 微信号
+        std::wstring name;		// 名称
+        std::wstring nickName;	// 昵称（备注）
     };
 
     typedef std::function<void(const QrCodeInfo&)> LoginQrCodeCb;
     typedef std::function<void(std::vector<ContactInfo>&)> ContactListCb;
-
-    dword_t getWeChatBaseAddr();
 }
 #endif//_INJECT_DEF_87B73D6D_C942_42E7_BDB5_7AB167FB67E7_
