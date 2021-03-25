@@ -20,14 +20,23 @@
     <ClInclude Include="pch.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="inject\inject_api.h">
-      <Filter>inject</Filter>
-    </ClInclude>
-    <ClInclude Include="inject\inject_dll.h">
-      <Filter>inject</Filter>
-    </ClInclude>
     <ClInclude Include="inject\log.h">
       <Filter>inject</Filter>
+    </ClInclude>
+    <ClInclude Include="inject\api_login.h">
+      <Filter>inject</Filter>
+    </ClInclude>
+    <ClInclude Include="inject\api_contact_list.h">
+      <Filter>inject</Filter>
+    </ClInclude>
+    <ClInclude Include="inject\inject_api.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="inject\inject_def.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="inject\inject_dll.h">
+      <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -37,10 +46,13 @@
     <ClCompile Include="pch.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="inject\inject_api_login.cpp">
+    <ClCompile Include="inject\log.cpp">
       <Filter>inject</Filter>
     </ClCompile>
-    <ClCompile Include="inject\log.cpp">
+    <ClCompile Include="inject\api_login.cpp">
+      <Filter>inject</Filter>
+    </ClCompile>
+    <ClCompile Include="inject\api_contact_list.cpp">
       <Filter>inject</Filter>
     </ClCompile>
   </ItemGroup>
