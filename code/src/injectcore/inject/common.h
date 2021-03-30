@@ -18,6 +18,13 @@ namespace inject {
       */
     std::wstring GetMsgByAddress(dword_t address);
 
+    /** @fn GetMsgByAddress
+      * @brief 从内存中读取字符串
+      * @param address：内存地址
+      * @return
+      */
+    std::string GetMsgByAddress2(dword_t address);
+
     /** @fn unHook
       * @brief 卸载
       * @param offset：偏移

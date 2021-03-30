@@ -29,6 +29,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "loginStatusMonitor", "src\l
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "contactListHook", "src\contactListHook\contactListHook.vcxproj", "{B9D62DFD-5159-4743-8D14-5723C01A4B32}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "logHook", "src\logHook\logHook.vcxproj", "{748968C5-4B86-4E78-A568-AC277443CE85}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -109,6 +111,14 @@ Global
 		{B9D62DFD-5159-4743-8D14-5723C01A4B32}.Release|x64.Build.0 = Release|x64
 		{B9D62DFD-5159-4743-8D14-5723C01A4B32}.Release|x86.ActiveCfg = Release|Win32
 		{B9D62DFD-5159-4743-8D14-5723C01A4B32}.Release|x86.Build.0 = Release|Win32
+		{748968C5-4B86-4E78-A568-AC277443CE85}.Debug|x64.ActiveCfg = Debug|x64
+		{748968C5-4B86-4E78-A568-AC277443CE85}.Debug|x64.Build.0 = Debug|x64
+		{748968C5-4B86-4E78-A568-AC277443CE85}.Debug|x86.ActiveCfg = Debug|Win32
+		{748968C5-4B86-4E78-A568-AC277443CE85}.Debug|x86.Build.0 = Debug|Win32
+		{748968C5-4B86-4E78-A568-AC277443CE85}.Release|x64.ActiveCfg = Release|x64
+		{748968C5-4B86-4E78-A568-AC277443CE85}.Release|x64.Build.0 = Release|x64
+		{748968C5-4B86-4E78-A568-AC277443CE85}.Release|x86.ActiveCfg = Release|Win32
+		{748968C5-4B86-4E78-A568-AC277443CE85}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,6 +133,7 @@ Global
 		{5CF263D5-9DC7-4390-B976-2B601D82C495} = {75E5A7EE-4DEE-409B-AA91-ECBA3F5D11FF}
 		{BE4D5316-118C-4099-ABC0-447DC93BE707} = {F6CD4595-1C86-4877-BBF7-111DD8512AEF}
 		{B9D62DFD-5159-4743-8D14-5723C01A4B32} = {F6CD4595-1C86-4877-BBF7-111DD8512AEF}
+		{748968C5-4B86-4E78-A568-AC277443CE85} = {F6CD4595-1C86-4877-BBF7-111DD8512AEF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0F633AA1-BB8A-4A02-BEAE-5A5EA9C1A276}

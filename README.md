@@ -24,6 +24,7 @@ study od,ce and trace wechat
 - injectordll：注入器测试动态库，使用debugview工具可查看日志。
 - loginQRCode：登录二维码HookDemo，可以显示微信登录二维码，包括刷新操作等。
 - loginStatusMonit：登录状态监控，每1秒钟打印一次微信的登录状态。
+- logHook：微信日志hook，可以通过debugview工具查看微信的日志。
 
 ## 声明
 

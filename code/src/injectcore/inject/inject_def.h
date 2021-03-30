@@ -30,6 +30,9 @@ namespace inject {
         ContactListContentWeChatUserNameOffset = 0x1C,  // 微信号
         ContactListContentWeChatNickNameOffset = 0x50,  // 微信备注（昵称）
         ContactListContentWeChatNameOffset = 0x64,      // 微信名称
+
+        LogHookOffset = 0x573380,   // 微信日志hook偏移
+        LogHookOriginCallOffset = 0xEA9534,  // 微信日志被覆盖的call
     };
 
     /** @class QrCodeInfo

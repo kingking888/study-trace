@@ -21,6 +21,11 @@ namespace inject {
         return  tmp;
     }
 
+    std::string GetMsgByAddress2(dword_t address) {
+        char* buf =  reinterpret_cast<char*>(address);
+        return std::string(buf);
+    }
+
     void unHook(dword_t offset, byte_t backCode[]) {
         dword_t hookAddr = getWeChatBaseAddr() + offset;
         HANDLE hwnd = ::OpenProcess(PROCESS_ALL_ACCESS, NULL, GetCurrentProcessId());
