@@ -81,26 +81,8 @@ namespace inject {
     }
 
     void unhookWeChatLog() {
-        dword_t baseAddr = getWeChatBaseAddr();
-        dword_t hookAddr = baseAddr + static_cast<dword_t>(inject::WeChatOffset::LogHookOffset);
-
-        HANDLE handle = ::OpenProcess(PROCESS_ALL_ACCESS, 0, GetCurrentProcessId());
-
-        if (handle == 0) {
-            Warnf("OpenProcess error");
-            return;
-        }
-
-        int ret = ::WriteProcessMemory(handle, reinterpret_cast<void*>(hookAddr), g_wechat_log_back_code_, kHookLen, nullptr);
-
-        if (ret == 0) {
-            ::CloseHandle(handle);
-            Warnf("WriteProcessMemory error");
-            return;
-        }
-
         Infof("unhookWeChatLog success");
-        ::CloseHandle(handle);
+        unHook(static_cast<dword_t>(inject::WeChatOffset::LogHookOffset), g_wechat_log_back_code_);
     }
 }
 

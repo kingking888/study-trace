@@ -10,5 +10,6 @@
 #include "api_login.h"
 #include "api_contact_list.h"
 #include "api_log.h"
+#include "api_msg.h"
 
 #endif//_INJECT_API_897C5832_9A64_4687_9440_3E175EDAC0A7_

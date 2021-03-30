@@ -25,6 +25,15 @@ namespace inject {
       */
     std::string GetMsgByAddress2(dword_t address);
 
+    /** @fn setupHook
+      * @brief 加载Hook
+      * @param hookOffset：要hook的偏移
+      * @param jumFuncPtr：替换到自己代码的函数地址
+      * @param backupCode：被覆盖的代码备份
+      * @param retAddr：返回地址
+      * @return
+      */
+    void setupHook(const dword_t hookOffset, dword_t jumFuncPtr, byte_t backupCode[], dword_t& retAddr);
     /** @fn unHook
       * @brief 卸载
       * @param offset：偏移

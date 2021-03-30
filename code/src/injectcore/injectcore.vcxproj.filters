@@ -44,6 +44,9 @@
     <ClInclude Include="inject\api_log.h">
       <Filter>inject</Filter>
     </ClInclude>
+    <ClInclude Include="inject\api_msg.h">
+      <Filter>inject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -65,6 +68,9 @@
       <Filter>inject</Filter>
     </ClCompile>
     <ClCompile Include="inject\api_log.cpp">
+      <Filter>inject</Filter>
+    </ClCompile>
+    <ClCompile Include="inject\api_msg.cpp">
       <Filter>inject</Filter>
     </ClCompile>
   </ItemGroup>

@@ -162,6 +162,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="inject\api_contact_list.h" />
     <ClInclude Include="inject\api_log.h" />
+    <ClInclude Include="inject\api_msg.h" />
     <ClInclude Include="inject\common.h" />
     <ClInclude Include="inject\inject_api.h" />
     <ClInclude Include="inject\inject_def.h" />
@@ -175,6 +176,7 @@
     <ClCompile Include="inject\api_contact_list.cpp" />
     <ClCompile Include="inject\api_log.cpp" />
     <ClCompile Include="inject\api_login.cpp" />
+    <ClCompile Include="inject\api_msg.cpp" />
     <ClCompile Include="inject\common.cpp" />
     <ClCompile Include="inject\log.cpp" />
     <ClCompile Include="pch.cpp">

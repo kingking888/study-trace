@@ -33,6 +33,11 @@ namespace inject {
 
         LogHookOffset = 0x573380,   // 微信日志hook偏移
         LogHookOriginCallOffset = 0xEA9534,  // 微信日志被覆盖的call
+
+        RecvMsgHookOffset = 0x3CD44D,      // 接收消息的hook偏移
+        RecvMsgOriginCallOffset = 0x86360, // 被覆盖的接收消息call偏移
+        RecvMsgStructSenderOffset = 0x40,  // 消息发送人偏移
+        RecvMsgStructContentOffset = 0x68, // 消息内容偏移
     };
 
     /** @class QrCodeInfo
@@ -60,5 +65,7 @@ namespace inject {
 
     typedef std::function<void(const QrCodeInfo&)> LoginQrCodeCb;
     typedef std::function<void(std::vector<ContactInfo>&)> ContactListCb;
+
+    typedef std::function<void(const std::wstring& from, const std::wstring& msgContent)> RecvMsgCb;
 }
 #endif//_INJECT_DEF_87B73D6D_C942_42E7_BDB5_7AB167FB67E7_
